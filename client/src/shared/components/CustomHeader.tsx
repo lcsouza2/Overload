@@ -64,8 +64,9 @@ export default function CustomHeader({
   const hasBreadcrumbs = breadcrumbs && breadcrumbs.length > 0;
 
   return (
+    // Esconde estritamente o topo no desktop (md:hidden) para evitar conflitos com a Sidebar
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border shadow-sm transition-transform duration-300 ease-in-out ${
+      className={`md:hidden fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-border shadow-sm transition-transform duration-300 ease-in-out ${
         isVisible ? 'translate-y-0' : '-translate-y-full'
       }`}
     >
@@ -155,7 +156,6 @@ export default function CustomHeader({
 
         {/* =====================================================================
             LADO DIREITO: Alternador de Tema + Ícone de Configurações (Engrenagem)
-            Ambos os botões utilizam exatamente as mesmas dimensões (w-9 h-9 p-2).
            ===================================================================== */}
         <div className="flex items-center gap-2 shrink-0">
           {/* Botão de Troca de Tema (À esquerda da Engrenagem) */}

@@ -68,7 +68,7 @@ export default function HomepageIndex() {
         )}
 
         {/* Conteúdo Principal de Teste */}
-        <main className="max-w-4xl mx-auto px-4 pt-24 pb-24 md:pb-16 flex flex-col gap-6">
+        <main className="max-w-4xl mx-auto px-4 pt-20 md:pt-8 pb-24 md:pb-12 flex flex-col gap-6">
           {/* Painel de Controle de Testes */}
           <section className="bg-surface p-6 rounded-2xl border border-border shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
