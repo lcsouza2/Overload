@@ -103,19 +103,19 @@ export default function CustomHeader({
           {hasBreadcrumbs ? (
             <nav
               aria-label="Breadcrumb"
-              className="flex items-center gap-1.5 text-sm overflow-x-auto whitespace-nowrap scrollbar-none py-1"
+              className="flex items-center gap-1.5 overflow-x-auto whitespace-nowrap scrollbar-none py-1"
             >
               {breadcrumbs.map((item, index) => {
                 const isLast = index === breadcrumbs.length - 1;
                 return (
                   <div key={index} className="flex items-center gap-1.5">
                     {index > 0 && (
-                      <span className="text-text-secondary/60 text-xs font-bold">
+                      <span className="text-text-secondary/60 text-xs md:text-sm font-bold">
                         /
                       </span>
                     )}
                     {isLast ? (
-                      <span className="font-bold text-text truncate max-w-[150px] sm:max-w-xs">
+                      <span className="font-bold text-text text-sm md:text-base truncate max-w-[150px] sm:max-w-xs md:max-w-none">
                         {item.label}
                       </span>
                     ) : (
@@ -128,7 +128,7 @@ export default function CustomHeader({
                             window.location.href = item.href;
                           }
                         }}
-                        className="text-text-secondary hover:text-primary transition-colors font-medium hover:underline truncate max-w-[120px] sm:max-w-none"
+                        className="text-text-secondary hover:text-primary transition-colors text-sm md:text-base font-medium hover:underline truncate max-w-[120px] sm:max-w-none"
                       >
                         {item.label}
                       </button>
