@@ -1,20 +1,25 @@
 import { useState } from 'react';
 import CustomHeader from '../../shared/components/CustomHeader';
+import BottomNav from '../../shared/components/BottomNav';
 
 export default function HomepageIndex() {
   const [currentView, setCurrentView] = useState<'home' | 'subpage'>('home');
+  const [activeTab, setActiveTab] = useState<string>('hoje');
   const [logMessage, setLogMessage] = useState<string>('Pronto para testar.');
 
   const showLog = (msg: string) => {
     setLogMessage(msg);
   };
 
+  const handleTabChange = (key: string) => {
+    setActiveTab(key);
+    showLog(`Navegou para a aba "${key.toUpperCase()}" na Bottom Bar!`);
+  };
+
   return (
     <div className="min-h-screen bg-background text-text">
       {/* =========================================================================
           CUSTOM HEADER ADAPTATIVO
-          - Em 'home': Exibe a Marca OVERLOAD + Alternador de Tema + Engrenagem de Configurações na extrema direita.
-          - Em 'subpage': Exibe Botão Voltar na esquerda + Breadcrumb Clicável + Alternador de Tema + Engrenagem.
          ========================================================================= */}
       {currentView === 'home' ? (
         <CustomHeader
@@ -52,7 +57,7 @@ export default function HomepageIndex() {
       )}
 
       {/* Conteúdo Principal de Teste */}
-      <main className="max-w-4xl mx-auto px-4 pt-24 pb-16 flex flex-col gap-6">
+      <main className="max-w-4xl mx-auto px-4 pt-24 pb-24 md:pb-16 flex flex-col gap-6">
         {/* Painel de Controle de Testes */}
         <section className="bg-surface p-6 rounded-2xl border border-border shadow-sm">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -87,31 +92,31 @@ export default function HomepageIndex() {
           </div>
         </section>
 
-        {/* Instruções do Teste */}
+        {/* Informações sobre a Bottom Nav */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="bg-card p-5 rounded-xl border border-card-border">
             <h3 className="font-semibold text-lg text-text mb-2 flex items-center gap-2">
-              <span>⚙️</span> Ícone de Configurações
+              <span>📱</span> Bottom Bar Mobile (Fixa)
             </h3>
             <p className="text-sm text-text-secondary">
-              Na <strong>extrema direita do header</strong> fica a engrenagem para a rota <code className="bg-background px-1.5 py-0.5 rounded text-primary">/settings</code>. À esquerda dela fica a troca de tema.
+              Contém obrigatoriamente a aba <strong>"Hoje"</strong>, além de <em>Planos</em>, <em>Evolução</em> e <em>Biblioteca</em>. Possui uma <strong>borda inferior de destaque (2px)</strong> que desliza com animação suave de 60 FPS ao trocar de aba!
             </p>
           </div>
 
           <div className="bg-card p-5 rounded-xl border border-card-border">
             <h3 className="font-semibold text-lg text-text mb-2 flex items-center gap-2">
-              <span>🧭</span> Breadcrumbs & Seta Voltar
+              <span>🎯</span> Aba Ativa: <span className="text-primary uppercase">{activeTab}</span>
             </h3>
             <p className="text-sm text-text-secondary">
-              Clique no botão de alternar visão acima para ver o header trocar o logo pela seta <code className="bg-background px-1.5 py-0.5 rounded text-primary">[ ← ]</code> e o caminho clicável <code className="bg-background px-1.5 py-0.5 rounded text-primary">Home / Treinos / Editar</code>.
+              Em dispositivos móveis (`&lt; 768px`), veja a barra fixa na parte inferior da tela com ícones alinhados acima de cada texto.
             </p>
           </div>
         </section>
 
-        {/* Blocos repetidos para gerar Scroll e testar o hide-on-scroll */}
+        {/* Blocos repetidos para gerar Scroll */}
         <div className="pt-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-text-secondary mb-3">
-            Role para testar a ocultação e reaparecimento do Header:
+            Role para testar a rolagem e o comportamento dos menus:
           </h3>
           <div className="flex flex-col gap-4">
             {Array.from({ length: 6 }).map((_, i) => (
@@ -123,14 +128,19 @@ export default function HomepageIndex() {
                   Card de Demonstração #{i + 1}
                 </h4>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  Role a página para baixo: o header irá deslizar para cima e se ocultar.
-                  Role um pouco para cima de qualquer ponto: o header reaparecerá instantaneamente com todas as ações e breadcrumbs intactos!
+                  Ao rolar para baixo, o header se oculta. Ao rolar um pouco para cima, ele reaparece.
+                  A Bottom Nav permanece fixa e acessível no mobile com o indicador deslizante na cor de destaque (`--color-primary`).
                 </p>
               </div>
             ))}
           </div>
         </div>
       </main>
+
+      {/* =========================================================================
+          BOTTOM NAVIGATION BAR (MOBILE PWA)
+         ========================================================================= */}
+      <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
     </div>
   );
 }
