@@ -80,7 +80,7 @@ export default function CustomHeader({
               onClick={handleBackClick}
               type="button"
               aria-label="Voltar para a página anterior"
-              className="p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-text transition-colors flex items-center justify-center shrink-0 active:scale-95"
+              className="w-9 h-9 p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-text transition-colors flex items-center justify-center shrink-0 active:scale-95"
             >
               <svg
                 className="w-5 h-5"
@@ -155,6 +155,7 @@ export default function CustomHeader({
 
         {/* =====================================================================
             LADO DIREITO: Alternador de Tema + Ícone de Configurações (Engrenagem)
+            Ambos os botões utilizam exatamente as mesmas dimensões (w-9 h-9 p-2).
            ===================================================================== */}
         <div className="flex items-center gap-2 shrink-0">
           {/* Botão de Troca de Tema (À esquerda da Engrenagem) */}
@@ -164,25 +165,46 @@ export default function CustomHeader({
               type="button"
               aria-label="Alternar Tema"
               title="Alternar Tema Escuro / Claro"
-              className="p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-text transition-colors flex items-center justify-center active:scale-95"
+              className="w-9 h-9 p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-text transition-colors flex items-center justify-center shrink-0 active:scale-95"
             >
               {theme === 'dark' ? (
-                <span className="flex items-center gap-1 text-xs">
-                  <span>☀️</span>
-                  <span className="hidden md:inline font-medium">Claro</span>
-                </span>
+                /* Ícone de Sol (Modo Claro) */
+                <svg
+                  className="w-5 h-5 text-warning"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
               ) : (
-                <span className="flex items-center gap-1 text-xs">
-                  <span>🌙</span>
-                  <span className="hidden md:inline font-medium">Escuro</span>
-                </span>
+                /* Ícone de Lua (Modo Escuro) */
+                <svg
+                  className="w-5 h-5 text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+                  />
+                </svg>
               )}
             </button>
           )}
 
           {/* =================================================================
               📍 ÍCONE DE ENGRENAGEM (EXTREMA DIREITA - CONFIGURAÇÕES)
-              Este botão deve acionar a navegação para a página de configurações (/settings).
              ================================================================= */}
           {showSettings && (
             <button
@@ -190,7 +212,7 @@ export default function CustomHeader({
               type="button"
               aria-label="Configurações da Aplicação"
               title="Configurações (/settings)"
-              className="p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-primary transition-colors flex items-center justify-center active:scale-95"
+              className="w-9 h-9 p-2 rounded-lg bg-background hover:bg-card border border-border text-text-secondary hover:text-primary transition-colors flex items-center justify-center shrink-0 active:scale-95"
             >
               <svg
                 className="w-5 h-5"
