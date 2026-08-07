@@ -2,6 +2,7 @@ import { useState } from 'react';
 import CustomHeader from '../../shared/components/CustomHeader';
 import BottomNav from '../../shared/components/BottomNav';
 import SidebarNav from '../../shared/components/SidebarNav';
+import DesktopBreadcrumb from '../../shared/components/DesktopBreadcrumb';
 
 export default function HomepageIndex() {
   const [currentView, setCurrentView] = useState<'home' | 'subpage'>('home');
@@ -17,6 +18,23 @@ export default function HomepageIndex() {
     showLog(`Navegou para a aba "${key.toUpperCase()}"!`);
   };
 
+  const subpageBreadcrumbs = [
+    {
+      label: 'Home',
+      onClick: () => {
+        setCurrentView('home');
+        showLog('Navegou para Home pelo Breadcrumb!');
+      },
+    },
+    {
+      label: 'Treinos',
+      onClick: () => showLog('Clicou no nó "Treinos" do Breadcrumb!'),
+    },
+    {
+      label: 'Editar Treino A',
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-text">
       {/* =========================================================================
@@ -29,7 +47,7 @@ export default function HomepageIndex() {
       />
 
       {/* =========================================================================
-          CUSTOM HEADER ADAPTATIVO
+          CUSTOM HEADER MOBILE (Visível estritamente em md:hidden)
          ========================================================================= */}
       <div className="md:pl-64 transition-all">
         {currentView === 'home' ? (
@@ -46,22 +64,7 @@ export default function HomepageIndex() {
               setCurrentView('home');
               showLog('Voltou para a Home pelo botão [ ← ]!');
             }}
-            breadcrumbs={[
-              {
-                label: 'Home',
-                onClick: () => {
-                  setCurrentView('home');
-                  showLog('Navegou para Home pelo Breadcrumb!');
-                },
-              },
-              {
-                label: 'Treinos',
-                onClick: () => showLog('Clicou no nó "Treinos" do Breadcrumb!'),
-              },
-              {
-                label: 'Editar Treino A',
-              },
-            ]}
+            breadcrumbs={subpageBreadcrumbs}
             showSettings={true}
             onSettingsClick={() => showLog('Clicou nas configurações dentro da sub-página (/settings)!')}
           />
@@ -69,6 +72,18 @@ export default function HomepageIndex() {
 
         {/* Conteúdo Principal de Teste */}
         <main className="max-w-4xl mx-auto px-4 pt-20 md:pt-8 pb-24 md:pb-12 flex flex-col gap-6">
+          {/* Breadcrumb Contextual para Desktop (Visível no topo do conteúdo apenas no desktop em subpáginas) */}
+          {currentView === 'subpage' && (
+            <DesktopBreadcrumb
+              showBackButton={true}
+              onBack={() => {
+                setCurrentView('home');
+                showLog('Voltou para a Home pelo botão [Voltar] do Desktop!');
+              }}
+              breadcrumbs={subpageBreadcrumbs}
+            />
+          )}
+
           {/* Painel de Controle de Testes */}
           <section className="bg-surface p-6 rounded-2xl border border-border shadow-sm">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -81,7 +96,7 @@ export default function HomepageIndex() {
                 </h2>
               </div>
 
-              {/* Alternador de Visão para Testar o Header */}
+              {/* Alternador de Visão para Testar a Navegação */}
               <button
                 type="button"
                 onClick={() => {
@@ -103,23 +118,23 @@ export default function HomepageIndex() {
             </div>
           </section>
 
-          {/* Informações sobre a Bottom Nav & Sidebar */}
+          {/* Informações sobre a Arquitetura de Breadcrumb */}
           <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-card p-5 rounded-xl border border-card-border">
               <h3 className="font-semibold text-lg text-text mb-2 flex items-center gap-2">
-                <span>📱</span> Bottom Bar Mobile (<code className="text-xs text-primary">md:hidden</code>)
+                <span>📱</span> Breadcrumb no Mobile
               </h3>
               <p className="text-sm text-text-secondary">
-                Visível apenas em celulares. A borda inferior de destaque (2px) agora se alinha perfeitamente com <strong>100% de precisão sob a aba ativa</strong> ("HOJE", "PLANOS", "EVOLUÇÃO", "BIBLIOTECA").
+                Substitui a marca OVERLOAD no header superior do celular, economizando tela com a seta <code className="bg-background px-1.5 py-0.5 rounded text-primary">[ ← ]</code>.
               </p>
             </div>
 
             <div className="bg-card p-5 rounded-xl border border-card-border">
               <h3 className="font-semibold text-lg text-text mb-2 flex items-center gap-2">
-                <span>🖥️</span> Sidebar Desktop (<code className="text-xs text-primary">hidden md:flex</code>)
+                <span>🖥️</span> Breadcrumb no Desktop
               </h3>
               <p className="text-sm text-text-secondary">
-                Em telas desktop (`&gt;= 768px`), a Bottom Bar se oculta automaticamente e dá lugar à Sidebar lateral de navegação fixa.
+                Fica posicionado no <strong>topo da área de conteúdo principal</strong> (à direita da Sidebar), mantendo a navegação limpa, sem poluir o menu lateral estático.
               </p>
             </div>
           </section>
@@ -139,8 +154,7 @@ export default function HomepageIndex() {
                     Card de Demonstração #{i + 1}
                   </h4>
                   <p className="text-sm text-text-secondary leading-relaxed">
-                    Ao rolar para baixo, o header se oculta. Ao rolar um pouco para cima, ele reaparece.
-                    A Bottom Nav permanece fixa no mobile com a barra alinhada e a Sidebar fica fixa no Desktop.
+                    Ao rolar para baixo no mobile, o header se oculta. No desktop, a Sidebar permanece fixa e a área principal exibe os Breadcrumbs perfeitamente alinhados ao conteúdo.
                   </p>
                 </div>
               ))}
