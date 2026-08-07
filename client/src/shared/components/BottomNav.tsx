@@ -34,7 +34,6 @@ export default function BottomNav({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Ícone de Halter / Dumbbell para o treino de Hoje */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -55,7 +54,6 @@ export default function BottomNav({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Ícone de Fichas / Planos */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -76,7 +74,6 @@ export default function BottomNav({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Ícone de Gráfico de Progresso / Overload */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -97,7 +94,6 @@ export default function BottomNav({
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Ícone de Livro / Acervo de Exercícios */}
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -122,20 +118,22 @@ export default function BottomNav({
   };
 
   return (
+    // Visível estritamente em dispositivos móveis (md:hidden)
     <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-surface/95 backdrop-blur-md border-t border-border shadow-lg">
-      <div className="relative max-w-md mx-auto flex items-center justify-around">
+      <div className="relative w-full grid grid-cols-4">
         {/* =====================================================================
             BORDA INFERIOR DE DESTAQUE (2px) QUE NAVEGA SUAVEMENTE ENTRE AS SEÇÕES
+            Largura exata de 25% (1/4 da grade) deslizando com translateX
            ===================================================================== */}
         <div
-          className="absolute bottom-0 h-[2px] bg-primary transition-transform duration-300 cubic-bezier(0.4,0,0.2,1)"
+          className="absolute bottom-0 left-0 h-[2px] bg-primary transition-transform duration-300 ease-out"
           style={{
             width: `${100 / navItems.length}%`,
             transform: `translateX(${activeIndex * 100}%)`,
           }}
         />
 
-        {/* Itens de Navegação com Ícones acima dos textos */}
+        {/* Itens de Navegação */}
         {navItems.map((item) => {
           const isActive = item.key === currentActiveTab;
           return (
@@ -144,13 +142,13 @@ export default function BottomNav({
               onClick={() => handleSelect(item.key)}
               type="button"
               aria-label={`Navegar para ${item.label}`}
-              className={`flex-1 flex flex-col items-center justify-center py-2.5 px-1 transition-colors relative active:scale-95 ${
+              className={`flex flex-col items-center justify-center py-2.5 px-1 transition-colors relative active:scale-95 ${
                 isActive
                   ? 'text-primary font-semibold'
                   : 'text-text-secondary hover:text-text'
               }`}
             >
-              {/* Ícone acima da descrição */}
+              {/* Ícone acima do texto */}
               <div
                 className={`transition-transform duration-200 ${
                   isActive ? 'scale-110 text-primary' : 'scale-100 text-text-secondary'
