@@ -23,14 +23,14 @@ export type ThemeMode = 'light' | 'dark' | 'system';
 
 /**
  * Tema Claro (Light Theme):
- * Fundo branco suave (off-white não absoluto) com acentos roxo neon, laranja elétrico e verde vibrante.
+ * Base off-white limpa com acentos em Roxo Neon, Ciano Oceano (substituindo o laranja) e Verde Esmeralda Menta (substituindo o verde amarelado).
  */
 export const lightTheme: ThemeColors = {
   background: '#FAF9F5',
   surface: '#FFFFFF',
   primary: '#7C3AED',       // Roxo Neon Elétrico
   primaryHover: '#6D28D9',  // Roxo Neon Profundo
-  secondary: '#EA580C',     // Laranja Elétrico
+  secondary: '#0284C7',     // Ciano Oceano (Alta legibilidade e harmonia com roxo)
   text: '#09090B',
   textSecondary: '#71717A',
   border: '#E4E4E7',
@@ -39,21 +39,21 @@ export const lightTheme: ThemeColors = {
   buttonText: '#FFFFFF',
   card: '#FFFFFF',
   cardBorder: '#E4E4E7',
-  success: '#16A34A',       // Verde Vibrante
+  success: '#059669',       // Verde Esmeralda Menta (Limpo e sofisticado)
   error: '#DC2626',
   warning: '#D97706',
 };
 
 /**
  * Tema Escuro (Dark Theme):
- * Fundo em tons de grafite/chumbo (preto não absoluto) com acentos roxo vibrante, laranja e verde claro de alto contraste.
+ * Base grafite/chumbo (preto não absoluto) com acentos em Roxo Elétrico, Ciano Turquesa Neón e Verde Esmeralda Menta de alto contraste.
  */
 export const darkTheme: ThemeColors = {
   background: '#09090B',    // Grafite Profundo (Preto não absoluto)
   surface: '#121215',       // Preto Carvão
-  primary: '#A855F7',       // Roxo Vibrante
+  primary: '#A855F7',       // Roxo Elétrico
   primaryHover: '#C084FC',  // Roxo Claro
-  secondary: '#F97316',     // Laranja Vibrante
+  secondary: '#06B6D4',     // Ciano / Turquesa Elétrico (Contraste perfeito com Roxo)
   text: '#F4F4F5',
   textSecondary: '#A1A1AA',
   border: '#27272A',
@@ -62,9 +62,9 @@ export const darkTheme: ThemeColors = {
   buttonText: '#FFFFFF',
   card: '#18181B',
   cardBorder: '#27272A',
-  success: '#4ADE80',       // Verde Claro (High Contrast)
+  success: '#34D399',       // Verde Esmeralda Menta (Alto contraste, sem brilho agressivo)
   error: '#F87171',
-  warning: '#FB923C',       // Laranja Claro
+  warning: '#FBBF24',
 };
 
 const THEME_STORAGE_KEY = 'overload_theme_mode';
