@@ -21,42 +21,50 @@ export interface ThemeColors {
 
 export type ThemeMode = 'light' | 'dark' | 'system';
 
+/**
+ * Tema Claro (Light Theme):
+ * Fundo branco suave (off-white não absoluto) com acentos roxo neon, laranja elétrico e verde vibrante.
+ */
 export const lightTheme: ThemeColors = {
-  background: '#F8FAFC',
+  background: '#FAF9F5',
   surface: '#FFFFFF',
-  primary: '#2563EB',
-  primaryHover: '#1D4ED8',
-  secondary: '#4F46E5',
-  text: '#0F172A',
-  textSecondary: '#64748B',
-  border: '#E2E8F0',
-  button: '#2563EB',
-  buttonHover: '#1D4ED8',
+  primary: '#7C3AED',       // Roxo Neon Elétrico
+  primaryHover: '#6D28D9',  // Roxo Neon Profundo
+  secondary: '#EA580C',     // Laranja Elétrico
+  text: '#09090B',
+  textSecondary: '#71717A',
+  border: '#E4E4E7',
+  button: '#7C3AED',
+  buttonHover: '#6D28D9',
   buttonText: '#FFFFFF',
   card: '#FFFFFF',
-  cardBorder: '#E2E8F0',
-  success: '#16A34A',
+  cardBorder: '#E4E4E7',
+  success: '#16A34A',       // Verde Vibrante
   error: '#DC2626',
   warning: '#D97706',
 };
 
+/**
+ * Tema Escuro (Dark Theme):
+ * Fundo em tons de grafite/chumbo (preto não absoluto) com acentos roxo vibrante, laranja e verde claro de alto contraste.
+ */
 export const darkTheme: ThemeColors = {
-  background: '#0F172A',
-  surface: '#1E293B',
-  primary: '#3B82F6',
-  primaryHover: '#60A5FA',
-  secondary: '#6366F1',
-  text: '#F8FAFC',
-  textSecondary: '#94A3B8',
-  border: '#334155',
-  button: '#3B82F6',
-  buttonHover: '#60A5FA',
+  background: '#09090B',    // Grafite Profundo (Preto não absoluto)
+  surface: '#121215',       // Preto Carvão
+  primary: '#A855F7',       // Roxo Vibrante
+  primaryHover: '#C084FC',  // Roxo Claro
+  secondary: '#F97316',     // Laranja Vibrante
+  text: '#F4F4F5',
+  textSecondary: '#A1A1AA',
+  border: '#27272A',
+  button: '#A855F7',
+  buttonHover: '#9333EA',
   buttonText: '#FFFFFF',
-  card: '#1E293B',
-  cardBorder: '#334155',
-  success: '#22C55E',
-  error: '#EF4444',
-  warning: '#F59E0B',
+  card: '#18181B',
+  cardBorder: '#27272A',
+  success: '#4ADE80',       // Verde Claro (High Contrast)
+  error: '#F87171',
+  warning: '#FB923C',       // Laranja Claro
 };
 
 const THEME_STORAGE_KEY = 'overload_theme_mode';
