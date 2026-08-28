@@ -1,9 +1,21 @@
-Overload é uma aplicação voltada para gerência da rotina de treinos e acompanhamento de desempenho, futuramente pode contar com módulos de tracking de nutrição e consumo de água por exemplo.
+Overload é uma aplicação voltada para gerência da rotina de treinos e acompanhamento de desempenho (sobrecarga progressiva), com suporte a uso em dispositivos móveis via PWA e sincronização em tempo real. Futuramente pode contar com módulos de tracking de nutrição e consumo de água.
 
-Atualmente o projeto está em estado inicial de desenvolvimento, sendo construída inicialmente uma aplicação web em ReactJS + Vite junto a tecnologia de PWA para porte e uso offline em dispositivos móveis.
+## Arquitetura do Projeto
 
-Tecnologias no cliente: ReactJS, Vite Server, PWA, TailwindCSS, Zod e Tanstack Query.
-Futuramente conforme a expansão do projeto, é discutível o uso de libs como o React Hook Form, Zustand ou outras.
+O projeto adota uma arquitetura **Client-Side Only / Serverless (BaaS)** visando custo zero de infraestrutura 24/7, manutenção simplificada e execução de alta performance:
 
-Tecnologias no servidor: Python + FastAPI, SQLAlchemy, PostgreSQL e Redis.
-O estágio de implementação do servidor é precário, com pouquíssimas funcionalidades implementadas de fato, entretanto, os modelos relacionais já estão definidos, o que pode ajudar a guiar a implementação das rotas e funcionalidades do backend e frontend.
+### Tecnologias no Cliente (Web / PWA):
+* **Core:** ReactJS 19 + TypeScript + Vite Server.
+* **PWA & Offline:** Suporte a PWA para instalação em dispositivos móveis e cache local.
+* **Estilização:** Tailwind CSS v4 com paleta customizada no design system (`useTheme.ts`).
+* **Validação & Estado:** Zod (validação de formulários e schemas) + TanStack Query (gerenciamento de cache, estado assíncrono e sincronização).
+
+### Backend & Persistência (Serverless BaaS):
+* **Supabase (PostgreSQL + Auth + RLS):**
+  * Banco de dados PostgreSQL hospedado sem custos de servidor.
+  * **Row Level Security (RLS):** Garantia de isolamento de dados no nível do banco (cada usuário acessa estritamente seus próprios treinos e fichas).
+  * **Autenticação:** Gerenciamento nativo de usuários (e-mail/senha).
+  * **Constraints & FKs:** Validação estrita de integridade relacional entre `workout_plan`, `workout_split` e `split_set_report`.
+
+### Observação sobre a API legada em Python/FastAPI:
+* O código em `api/` (FastAPI + SQLAlchemy + Redis) está mantido no repositório como arquivo de referência dos modelos relacionais, mas não é necessário para o funcionamento nem para a hospedagem do projeto.
